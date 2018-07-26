@@ -92,7 +92,7 @@ class VariableMgr(object):
         for current_valuedict_key in ordered_valuedict_keys:
             if current_valuedict_key < len(var_value):
                 raise
-            for _ in xrange(current_valuedict_key - len(var_value)):
+            for _ in range(current_valuedict_key - len(var_value)):
                 var_value.append('0x00')
             var_value += valuedict[current_valuedict_key]
         return var_value
