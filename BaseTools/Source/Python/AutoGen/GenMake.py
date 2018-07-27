@@ -1040,8 +1040,14 @@ cleanlib:
                     continue
 
                 if FileContent[0] == 0xff or FileContent[0] == 0xfe:
-                    FileContent = unicode(FileContent, "utf-16")
-                IncludedFileList = gIncludePattern.findall(FileContent)
+                    FileContent = str(FileContent, encoding="utf-16")
+                    IncludedFileList = gIncludePattern.findall(FileContent)
+                else:
+                    try:
+                        FileContent = str(FileContent, encoding="utf-8")
+                        IncludedFileList = gIncludePattern.findall(FileContent)
+                    except:
+                        continue
 
                 for Inc in IncludedFileList:
                     Inc = Inc.strip()
