@@ -24,8 +24,8 @@ import pickle
 import array
 import shutil
 from struct import pack
-from UserDict import IterableUserDict
-from UserList import UserList
+from collections import UserDict as IterableUserDict
+from collections import OrderedDict
 
 from Common import EdkLogger as EdkLogger
 from Common import GlobalData as GlobalData
@@ -1949,7 +1949,7 @@ class SkuClass():
                             ExtraData = "SKU-ID [%s] value %s exceeds the max value of UINT64"
                                       % (SkuName, SkuId))
 
-        self.AvailableSkuIds = sdict()
+        self.AvailableSkuIds = OrderedDict()
         self.SkuIdSet = []
         self.SkuIdNumberSet = []
         self.SkuData = SkuIds
