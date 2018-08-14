@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #
 
-from __future__ import absolute_import
 from Common.StringUtils import *
 from Common.DataType import *
 from Common.Misc import *
