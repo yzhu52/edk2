@@ -1649,7 +1649,7 @@ class PlatformAutoGen(AutoGen):
         for pcd in self._DynamicPcdList:
             if len(pcd.SkuInfoList) == 1:
                 for (SkuName, SkuId) in allskuset:
-                    if type(SkuId) in (str, unicode) and eval(SkuId) == 0 or SkuId == 0:
+                    if isinstance(SkuId, str) and eval(SkuId) == 0 or SkuId == 0:
                         continue
                     pcd.SkuInfoList[SkuName] = copy.deepcopy(pcd.SkuInfoList[TAB_DEFAULT])
                     pcd.SkuInfoList[SkuName].SkuId = SkuId
