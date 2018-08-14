@@ -1583,7 +1583,7 @@ def CheckPcdDatum(Type, Value):
                           ", FALSE, False, false, 0x0, 0x00, 0" % (Value, Type)
     elif Type in [TAB_UINT8, TAB_UINT16, TAB_UINT32, TAB_UINT64]:
         try:
-            Value = long(Value, 0)
+            Value = int(Value, 0)
         except:
             return False, "Invalid value [%s] of type [%s];"\
                           " must be a hexadecimal, decimal or octal in C language format." % (Value, Type)
@@ -2086,7 +2086,7 @@ def PackRegistryFormatGuid(Guid):
 #   @retval     Value    The integer value that the input represents
 #
 def GetIntegerValue(Input):
-    if type(Input) in (int, long):
+    if isinstance(Input, int):
         return Input
     String = Input
     if String.endswith("U"):
