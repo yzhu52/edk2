@@ -641,7 +641,7 @@ class ModuleReport(object):
 
                 Match = gTimeStampPattern.search(FileContents)
                 if Match:
-                    self.BuildTimeStamp = datetime.fromtimestamp(int(Match.group(1)))
+                    self.BuildTimeStamp = datetime.utcfromtimestamp(int(Match.group(1)))
             except IOError:
                 EdkLogger.warn(None, "Fail to read report file", FwReportFileName)
 
