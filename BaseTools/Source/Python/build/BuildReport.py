@@ -79,7 +79,7 @@ gGlueLibEntryPoint = re.compile(r"__EDKII_GLUE_MODULE_ENTRY_POINT__\s*=\s*(\w+)"
 gLineMaxLength = 120
 
 ## Tags for end of line in report
-gEndOfLine = "\r\n"
+gEndOfLine = "\n"
 
 ## Tags for section start, end and separator
 gSectionStart = ">" + "=" * (gLineMaxLength - 2) + "<"

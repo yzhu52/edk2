@@ -616,17 +616,17 @@ class WorkspaceAutoGen(AutoGen):
         #
         content = 'gCommandLineDefines: '
         content += str(GlobalData.gCommandLineDefines)
-        content += os.linesep
+        content += "\n"
         content += 'BuildOptionPcd: '
         content += str(GlobalData.BuildOptionPcd)
-        content += os.linesep
+        content += "\n"
         content += 'Active Platform: '
         content += str(self.Platform)
-        content += os.linesep
+        content += "\n"
         if self.FdfFile:
             content += 'Flash Image Definition: '
             content += str(self.FdfFile)
-            content += os.linesep
+            content += "\n"
         SaveFileOnChange(os.path.join(self.BuildDir, 'BuildOptions'), content, False)
 
         #
@@ -636,7 +636,7 @@ class WorkspaceAutoGen(AutoGen):
         if Pa.PcdTokenNumber:
             if Pa.DynamicPcdList:
                 for Pcd in Pa.DynamicPcdList:
-                    PcdTokenNumber += os.linesep
+                    PcdTokenNumber += "\n"
                     PcdTokenNumber += str((Pcd.TokenCName, Pcd.TokenSpaceGuidCName))
                     PcdTokenNumber += ' : '
                     PcdTokenNumber += str(Pa.PcdTokenNumber[Pcd.TokenCName, Pcd.TokenSpaceGuidCName])
@@ -1598,6 +1598,8 @@ class PlatformAutoGen(AutoGen):
         self._DynamicPcdList.extend(list(UnicodePcdArray))
         self._DynamicPcdList.extend(list(HiiPcdArray))
         self._DynamicPcdList.extend(list(OtherPcdArray))
+        #python3.6 set is not ordered at all
+        self._DynamicPcdList = sorted(self._DynamicPcdList, key=lambda x:(x.TokenSpaceGuidCName, x.TokenCName))
         allskuset = [(SkuName, Sku.SkuId) for pcd in self._DynamicPcdList for (SkuName, Sku) in pcd.SkuInfoList.items()]
         for pcd in self._DynamicPcdList:
             if len(pcd.SkuInfoList) == 1:
