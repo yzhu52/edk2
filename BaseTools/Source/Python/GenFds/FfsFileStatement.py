@@ -82,7 +82,7 @@ class FileStatement (FileStatementClassObject) :
         Dict.update(self.DefineVarDict)
         SectionAlignments = None
         if self.FvName is not None :
-            Buffer = BytesIO('')
+            Buffer = BytesIO()
             if self.FvName.upper() not in GenFdsGlobalVariable.FdfParser.Profile.FvDict:
                 EdkLogger.error("GenFds", GENFDS_ERROR, "FV (%s) is NOT described in FDF file!" % (self.FvName))
             Fv = GenFdsGlobalVariable.FdfParser.Profile.FvDict.get(self.FvName.upper())

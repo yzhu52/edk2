@@ -285,7 +285,7 @@ class VariableMgr(object):
 
     @staticmethod
     def PACK_VARIABLES_DATA(var_value,data_type, tail = None):
-        Buffer = ""
+        Buffer = bytearray()
         data_len = 0
         if data_type == DataType.TAB_VOID:
             for value_char in var_value.strip("{").strip("}").split(","):
@@ -315,7 +315,7 @@ class VariableMgr(object):
 
     @staticmethod
     def PACK_DEFAULT_DATA(defaultstoragename, skuid, var_value):
-        Buffer = ""
+        Buffer = bytearray()
         Buffer += pack("=L", 4+8+8)
         Buffer += pack("=Q", int(skuid))
         Buffer += pack("=Q", int(defaultstoragename))
@@ -340,7 +340,7 @@ class VariableMgr(object):
     def PACK_DELTA_DATA(self, skuname, defaultstoragename, delta_list):
         skuid = self.GetSkuId(skuname)
         defaultstorageid = self.GetDefaultStoreId(defaultstoragename)
-        Buffer = ""
+        Buffer = bytearray()
         Buffer += pack("=L", 4+8+8)
         Buffer += pack("=Q", int(skuid))
         Buffer += pack("=Q", int(defaultstorageid))
@@ -363,7 +363,7 @@ class VariableMgr(object):
 
     @staticmethod
     def PACK_VARIABLE_NAME(var_name):
-        Buffer = ""
+        Buffer = bytearray()
         for name_char in var_name.strip("{").strip("}").split(","):
             Buffer += pack("=B", int(name_char, 16))
 

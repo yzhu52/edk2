@@ -674,7 +674,7 @@ class GenVPD :
             EdkLogger.error("BPDG", BuildToolError.FILE_OPEN_FAILURE, "File open failed for %s" % self.MapFileName, None)
 
         # Use a instance of BytesIO to cache data
-        fStringIO = BytesIO('')
+        fStringIO = BytesIO()
 
         # Write the header of map file.
         try :

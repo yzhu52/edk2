@@ -1926,7 +1926,7 @@ def CreateIdfFileCode(Info, AutoGenC, StringH, IdfGenCFlag, IdfGenBinBuffer):
 
 def BmpImageDecoder(File, Buffer, PaletteIndex, TransParent):
     ImageType, = struct.unpack('2s', Buffer[0:2])
-    if ImageType!= 'BM': # BMP file type is 'BM'
+    if ImageType!= b'BM': # BMP file type is 'BM'
         EdkLogger.error("build", FILE_TYPE_MISMATCH, "The file %s is not a standard BMP file." % File.Path)
     BMP_IMAGE_HEADER = collections.namedtuple('BMP_IMAGE_HEADER', ['bfSize', 'bfReserved1', 'bfReserved2', 'bfOffBits', 'biSize', 'biWidth', 'biHeight', 'biPlanes', 'biBitCount', 'biCompression', 'biSizeImage', 'biXPelsPerMeter', 'biYPelsPerMeter', 'biClrUsed', 'biClrImportant'])
     BMP_IMAGE_HEADER_STRUCT = struct.Struct('IHHIIIIHHIIIIII')
@@ -1998,7 +1998,7 @@ def BmpImageDecoder(File, Buffer, PaletteIndex, TransParent):
         for Index in range(0, len(PaletteBuffer)):
             if Index % 4 == 3:
                 continue
-            PaletteTemp += PaletteBuffer[Index]
+            PaletteTemp += bytes([PaletteBuffer[Index]])
         PaletteBuffer = PaletteTemp[1:]
     return ImageBuffer, PaletteBuffer
 
