@@ -227,7 +227,7 @@ class InfSectionParser(InfDefinSectionParser,
         self.InfBuildOptionSection = InfBuildOptionsObject()
         self.InfLibraryClassSection = InfLibraryClassObject()
         self.InfPackageSection = InfPackageObject()
-        self.InfPcdSection = InfPcdObject(self.MetaFiles.keys()[0])
+        self.InfPcdSection = InfPcdObject(list(self.MetaFiles.keys())[0])
         self.InfSourcesSection = InfSourcesObject()
         self.InfUserExtensionSection = InfUserExtensionObject()
         self.InfProtocolSection = InfProtocolObject()

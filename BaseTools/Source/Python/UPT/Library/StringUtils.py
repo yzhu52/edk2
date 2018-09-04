@@ -20,7 +20,6 @@ StringUtils
 #
 import re
 import os.path
-from string import strip
 import Logger.Log as Logger
 import Library.DataType as DataType
 from Logger.ToolError import FORMAT_INVALID
@@ -44,7 +43,7 @@ gMACRO_PATTERN = re.compile("\$\(([_A-Z][_A-Z0-9]*)\)", re.UNICODE)
 #
 #
 def GetSplitValueList(String, SplitTag=DataType.TAB_VALUE_SPLIT, MaxSplit= -1):
-    return map(lambda l: l.strip(), String.split(SplitTag, MaxSplit))
+    return list(map(lambda l: l.strip(), String.split(SplitTag, MaxSplit)))
 
 ## MergeArches
 #
@@ -435,7 +434,7 @@ def GetSingleValueOfKeyFromLines(Lines, Dictionary, CommentCharacter, KeySplitCh
                 #
                 LineList[1] = CleanString(LineList[1], CommentCharacter)
                 if ValueSplitFlag:
-                    Value = map(strip, LineList[1].split(ValueSplitCharacter))
+                    Value = map(lambda x: x.strip(), LineList[1].split(ValueSplitCharacter))
                 else:
                     Value = CleanString(LineList[1], CommentCharacter).splitlines()
 

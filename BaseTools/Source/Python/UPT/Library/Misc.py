@@ -32,7 +32,7 @@ from os import linesep
 from os import walk
 from os import environ
 import re
-from UserDict import IterableUserDict
+from collections import UserDict as IterableUserDict
 
 import Logger.Log as Logger
 from Logger import StringTable as ST
@@ -957,7 +957,7 @@ def GetLibInstanceInfo(String, WorkSpace, LineNo):
         FileLinesList = []
 
         try:
-            FInputfile = open(FullFileName, "rb", 0)
+            FInputfile = open(FullFileName, "r")
             try:
                 FileLinesList = FInputfile.readlines()
             except BaseException:

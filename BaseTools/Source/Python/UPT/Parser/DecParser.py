@@ -752,7 +752,7 @@ class _DecUserExtension(_DecBase):
 class Dec(_DecBase, _DecComments):
     def __init__(self, DecFile, Parse = True):
         try:
-            Content = ConvertSpecialChar(open(DecFile, 'rb').readlines())
+            Content = ConvertSpecialChar(open(DecFile, 'r').readlines())
         except BaseException:
             Logger.Error(TOOL_NAME, FILE_OPEN_FAILURE, File=DecFile,
                          ExtraData=ST.ERR_DECPARSE_FILEOPEN % DecFile)

@@ -51,7 +51,7 @@ def OpenInfFile(Filename):
     FileLinesList = []
 
     try:
-        FInputfile = open(Filename, "rb", 0)
+        FInputfile = open(Filename, "r")
         try:
             FileLinesList = FInputfile.readlines()
         except BaseException:
