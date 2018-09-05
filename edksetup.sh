@@ -111,10 +111,40 @@ function SetupEnv()
   fi
 }
 
+function SetupPython3()
+{
+  origin=$(readlink /usr/bin/python3)
+  origin_verion=${origin##*python}
+  echo $origin_version
+  for python in $(ls /usr/bin/python* | grep python3 | grep -v m)
+  do
+    python_version=${python##*python}
+    if [ ${#python_version} -gt 3 ];then
+      python_version=${python_version:0:2}
+    fi
+    echo "python_verion $python_version"
+    ret=`echo "$origin_verion < $python_version" |bc`
+    if [ $ret -eq 1 ]; then
+      origin_version=$python_version
+      export PYTHON3=$python
+    fi
+  done
+  ret=`echo "$origin_verion < 3.6" |bc`
+  if [ $ret -eq 1 ]; then
+    echo
+    echo ERROR!!!, python3 version need larger than or equal 3.6
+    echo 
+    return 1
+  fi
+
+ 
+}
+
 function SourceEnv()
 {
   SetWorkspace &&
   SetupEnv
+  SetupPython3
 }
 
 I=$#
