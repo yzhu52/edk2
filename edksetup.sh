@@ -113,16 +113,12 @@ function SetupEnv()
 
 function SetupPython3()
 {
-  origin=$(readlink /usr/bin/python3)
-  origin_verion=${origin##*python}
-  echo $origin_version
-  for python in $(ls /usr/bin/python* | grep python3 | grep -v m)
+  for python in $(whereis python3 | grep -v m)
   do
     python_version=${python##*python}
     if [ ${#python_version} -gt 3 ];then
       python_version=${python_version:0:2}
     fi
-    echo "python_verion $python_version"
     ret=`echo "$origin_verion < $python_version" |bc`
     if [ $ret -eq 1 ]; then
       origin_version=$python_version
@@ -132,7 +128,7 @@ function SetupPython3()
   ret=`echo "$origin_verion < 3.6" |bc`
   if [ $ret -eq 1 ]; then
     echo
-    echo ERROR!!!, python3 version need larger than or equal 3.6
+    echo ERROR!!!, python version should greater than or equal to version 3.6.
     echo 
     return 1
   fi
