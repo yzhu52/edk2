@@ -124,7 +124,7 @@ class VariableMgr(object):
 
             default_data_array = ()
             for item in default_data_buffer:
-                default_data_array += unpack("B", item)
+                default_data_array += unpack("B", bytes([item]))
 
             var_data[(DataType.TAB_DEFAULT, DataType.TAB_DEFAULT_STORES_DEFAULT)][index] = (default_data_buffer, sku_var_info[(DataType.TAB_DEFAULT, DataType.TAB_DEFAULT_STORES_DEFAULT)])
 
@@ -142,7 +142,7 @@ class VariableMgr(object):
 
                 others_data_array = ()
                 for item in others_data_buffer:
-                    others_data_array += unpack("B", item)
+                    others_data_array += unpack("B", bytes([item]))
 
                 data_delta = VariableMgr.calculate_delta(default_data_array, others_data_array)
 
@@ -158,7 +158,7 @@ class VariableMgr(object):
             return []
 
         pcds_default_data = var_data.get((DataType.TAB_DEFAULT, DataType.TAB_DEFAULT_STORES_DEFAULT), {})
-        NvStoreDataBuffer = ""
+        NvStoreDataBuffer = bytearray()
         var_data_offset = collections.OrderedDict()
         offset = NvStorageHeaderSize
         for default_data, default_info in pcds_default_data.values():
@@ -185,7 +185,7 @@ class VariableMgr(object):
 
         nv_default_part = VariableMgr.AlignData(VariableMgr.PACK_DEFAULT_DATA(0, 0, VariableMgr.unpack_data(variable_storage_header_buffer+NvStoreDataBuffer)), 8)
 
-        data_delta_structure_buffer = ""
+        data_delta_structure_buffer = bytearray()
         for skuname, defaultstore in var_data:
             if (skuname, defaultstore) == (DataType.TAB_DEFAULT, DataType.TAB_DEFAULT_STORES_DEFAULT):
                 continue
@@ -217,7 +217,7 @@ class VariableMgr(object):
     def unpack_data(data):
         final_data = ()
         for item in data:
-            final_data += unpack("B", item)
+            final_data += unpack("B", bytes([item]))
         return final_data
 
     @staticmethod

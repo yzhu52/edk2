@@ -1301,7 +1301,7 @@ def ParseDevPathValue (Value):
 
 def ParseFieldValue (Value):
     if isinstance(Value, type(0)):
-        return Value, (Value.bit_length() + 7) / 8
+        return Value, (Value.bit_length() + 7) // 8
     if not isinstance(Value, type('')):
         raise BadExpression('Type %s is %s' %(Value, type(Value)))
     Value = Value.strip()
@@ -1335,7 +1335,7 @@ def ParseFieldValue (Value):
         if Value[0] == '"' and Value[-1] == '"':
             Value = Value[1:-1]
         try:
-            Value = "'" + uuid.UUID(Value).bytes_le + "'"
+            Value = "{" + ','.join([str(i) for i in uuid.UUID(Value).bytes_le]) + "}"
         except ValueError as Message:
             raise BadExpression(Message)
         Value, Size = ParseFieldValue(Value)
@@ -1419,12 +1419,12 @@ def ParseFieldValue (Value):
         Value = int(Value, 16)
         if Value == 0:
             return 0, 1
-        return Value, (Value.bit_length() + 7) / 8
+        return Value, (Value.bit_length() + 7) // 8
     if Value[0].isdigit():
         Value = int(Value, 10)
         if Value == 0:
             return 0, 1
-        return Value, (Value.bit_length() + 7) / 8
+        return Value, (Value.bit_length() + 7) // 8
     if Value.lower() == 'true':
         return 1, 1
     if Value.lower() == 'false':
