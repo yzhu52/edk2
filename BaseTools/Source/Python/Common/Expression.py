@@ -898,7 +898,7 @@ class ValueExpressionEx(ValueExpression):
                     if TmpValue.bit_length() == 0:
                         PcdValue = '{0x00}'
                     else:
-                        for I in range((TmpValue.bit_length() + 7) / 8):
+                        for I in range((TmpValue.bit_length() + 7) // 8):
                             TmpList.append('0x%02x' % ((TmpValue >> I * 8) & 0xff))
                         PcdValue = '{' + ', '.join(TmpList) + '}'
                 except:
