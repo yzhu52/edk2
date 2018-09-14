@@ -522,7 +522,7 @@ class WorkspaceAutoGen(AutoGen):
             for BuildData in PGen.BuildDatabase._CACHE_.values():
                 if BuildData.Arch != Arch:
                     continue
-                for key in BuildData.Pcds:
+                for key in list(BuildData.Pcds.keys()):
                     for SinglePcd in GlobalData.MixedPcd:
                         if (BuildData.Pcds[key].TokenCName, BuildData.Pcds[key].TokenSpaceGuidCName) == SinglePcd:
                             for item in GlobalData.MixedPcd[SinglePcd]:
