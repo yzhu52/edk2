@@ -425,6 +425,13 @@ class ValueExpression(BaseExpression):
                 else:
                     Val = Val3
                 continue
+            #
+            # PEP 238 -- Changing the Division Operator
+            # x/y to return a reasonable approximation of the mathematical result of the division ("true division")
+            # x//y to return the floor ("floor division")
+            #
+            if Op == '/':
+                Op = '//'
             try:
                 Val = self.Eval(Op, Val, EvalFunc())
             except WrnExpression as Warn:
