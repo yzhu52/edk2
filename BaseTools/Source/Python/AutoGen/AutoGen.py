@@ -661,7 +661,7 @@ class WorkspaceAutoGen(AutoGen):
             for files in AllWorkSpaceMetaFiles:
                 if files.endswith('.dec'):
                     continue
-                f = open(files, 'r')
+                f = open(files, 'rb')
                 Content = f.read()
                 f.close()
                 m.update(Content)
@@ -690,7 +690,7 @@ class WorkspaceAutoGen(AutoGen):
         HashFile = os.path.join(PkgDir, Pkg.PackageName + '.hash')
         m = hashlib.md5()
         # Get .dec file's hash value
-        f = open(Pkg.MetaFile.Path, 'r')
+        f = open(Pkg.MetaFile.Path, 'rb')
         Content = f.read()
         f.close()
         m.update(Content)
@@ -700,7 +700,7 @@ class WorkspaceAutoGen(AutoGen):
                 for Root, Dirs, Files in os.walk(str(inc)):
                     for File in sorted(Files):
                         File_Path = os.path.join(Root, File)
-                        f = open(File_Path, 'r')
+                        f = open(File_Path, 'rb')
                         Content = f.read()
                         f.close()
                         m.update(Content)
@@ -4018,29 +4018,29 @@ class ModuleAutoGen(AutoGen):
             GlobalData.gModuleHash[self.Arch] = {}
         m = hashlib.md5()
         # Add Platform level hash
-        m.update(GlobalData.gPlatformHash)
+        m.update(GlobalData.gPlatformHash.encode('utf-8'))
         # Add Package level hash
         if self.DependentPackageList:
             for Pkg in sorted(self.DependentPackageList, key=lambda x: x.PackageName):
                 if Pkg.PackageName in GlobalData.gPackageHash[self.Arch]:
-                    m.update(GlobalData.gPackageHash[self.Arch][Pkg.PackageName])
+                    m.update(GlobalData.gPackageHash[self.Arch][Pkg.PackageName].encode('utf-8'))
 
         # Add Library hash
         if self.LibraryAutoGenList:
             for Lib in sorted(self.LibraryAutoGenList, key=lambda x: x.Name):
                 if Lib.Name not in GlobalData.gModuleHash[self.Arch]:
                     Lib.GenModuleHash()
-                m.update(GlobalData.gModuleHash[self.Arch][Lib.Name])
+                m.update(GlobalData.gModuleHash[self.Arch][Lib.Name].encode('utf-8'))
 
         # Add Module self
-        f = open(str(self.MetaFile), 'r')
+        f = open(str(self.MetaFile), 'rb')
         Content = f.read()
         f.close()
         m.update(Content)
         # Add Module's source files
         if self.SourceFileList:
             for File in sorted(self.SourceFileList, key=lambda x: str(x)):
-                f = open(str(File), 'r')
+                f = open(str(File), 'rb')
                 Content = f.read()
                 f.close()
                 m.update(Content)
