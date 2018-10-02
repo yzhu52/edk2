@@ -115,7 +115,7 @@ function SetupPython3()
 {
   for python in $(whereis python3)
   do
-    python=$(echo $python | grep "[[:digit:]]$")
+    python=$(echo $python | grep "[[:digit:]]$" || true)
     python_version=${python##*python}
     if [ -z "${python_version}" ];then
       continue
