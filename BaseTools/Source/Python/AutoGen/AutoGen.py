@@ -3208,7 +3208,7 @@ class ModuleAutoGen(AutoGen):
             AutoFile = PathClass(gAutoGenStringFileName % {"module_name":self.Name}, self.DebugDir)
             RetVal[AutoFile] = str(StringH)
             self._ApplyBuildRule(AutoFile, TAB_UNKNOWN_FILE)
-        if UniStringBinBuffer is not None and UniStringBinBuffer.getvalue() != "":
+        if UniStringBinBuffer is not None and UniStringBinBuffer.getvalue() != b"":
             AutoFile = PathClass(gAutoGenStringFormFileName % {"module_name":self.Name}, self.OutputDir)
             RetVal[AutoFile] = UniStringBinBuffer.getvalue()
             AutoFile.IsBinary = True
@@ -3219,7 +3219,7 @@ class ModuleAutoGen(AutoGen):
             AutoFile = PathClass(gAutoGenImageDefFileName % {"module_name":self.Name}, self.DebugDir)
             RetVal[AutoFile] = str(StringIdf)
             self._ApplyBuildRule(AutoFile, TAB_UNKNOWN_FILE)
-        if IdfGenBinBuffer is not None and IdfGenBinBuffer.getvalue() != "":
+        if IdfGenBinBuffer is not None and IdfGenBinBuffer.getvalue() != b"":
             AutoFile = PathClass(gAutoGenIdfFileName % {"module_name":self.Name}, self.OutputDir)
             RetVal[AutoFile] = IdfGenBinBuffer.getvalue()
             AutoFile.IsBinary = True
