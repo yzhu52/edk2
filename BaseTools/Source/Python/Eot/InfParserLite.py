@@ -22,8 +22,8 @@ from Common.DataType import *
 from CommonDataClass.DataClass import *
 from Common.Identification import *
 from Common.StringUtils import *
-from .Parser import *
-from . import Database
+from Eot.Parser import *
+from Eot import Database
 
 ## EdkInfParser() class
 #

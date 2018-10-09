@@ -1602,7 +1602,7 @@ class PredictionReport(object):
         TempFile.close()
 
         try:
-            from Eot.Eot import Eot
+            from Eot.EotMain import Eot
 
             #
             # Invoke EOT tool and echo its runtime performance

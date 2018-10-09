@@ -35,7 +35,7 @@ IgnoredKeywordList = ['EFI_ERROR']
 
 def GetIgnoredDirListPattern():
     skipList = list(EccGlobalData.gConfig.SkipDirList) + ['.svn']
-    DirString = string.join(skipList, '|')
+    DirString = '|'.join(skipList)
     p = re.compile(r'.*[\\/](?:%s)[\\/]?.*' % DirString)
     return p
 
