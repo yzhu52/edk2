@@ -299,16 +299,18 @@ goto end
      )
   )
 
-  if defined PYTHON_HOME (
-    if EXIST "%PYTHON_HOME%" (
-      set PYTHON3=%PYTHON_HOME%\python.exe
-    )
-  ) else (
-    set PYTHON3=py -3
-  )
+set PYTHON3=py -3
 :check_python_version
-    %PYTHON3% --version >NUL 2>&1
-   if %ERRORLEVEL% NEQ 0 (
+  %PYTHON3% --version >NUL 2>&1
+  if %ERRORLEVEL% NEQ 0 (
+    if defined PYTHON_HOME (
+      if EXIST "%PYTHON_HOME%" (
+        set PYTHON3=%PYTHON_HOME%\python.exe
+      )
+    )
+  )
+  %PYTHON3% --version >NUL 2>&1
+  if %ERRORLEVEL% NEQ 0 (
      echo.
      echo !!! ERROR !!!  %PYTHON3% not install.
      echo.
