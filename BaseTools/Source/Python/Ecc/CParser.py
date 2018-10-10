@@ -3857,7 +3857,7 @@ class CParser ( Parser ):
                         self.match(CParser.T__37)
                         self.state = 576
                         localctx.a = self.match(CParser.T__38)
-                        self.StoreFunctionCalling((None if localctx.p is None else localctx.p.start).line, (None if localctx.p is None else localctx.p.start).column, (0 if localctx.a is None else localctx.a.line), localctx.a.start.column, self.FuncCallText, '')
+                        self.StoreFunctionCalling((None if localctx.p is None else localctx.p.start).line, (None if localctx.p is None else localctx.p.start).column, (0 if localctx.a is None else localctx.a.line), localctx.a.column, self.FuncCallText, '')
                         pass
 
                     elif la_ == 3:
