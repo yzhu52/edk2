@@ -153,21 +153,3 @@ class EdkInfParser(object):
         self.ParserSource(CurrentSection, SectionItemList, ArchList, ThirdList)
         #End of For
 
-##
-#
-# This acts like the main() function for the script, unless it is 'import'ed into another
-# script.
-#
-if __name__ == '__main__':
-    EdkLogger.Initialize()
-    EdkLogger.SetLevel(EdkLogger.QUIET)
-
-    Db = Database.Database('Inf.db')
-    Db.InitDatabase()
-    P = EdkInfParser(os.path.normpath("C:\Framework\Edk\Sample\Platform\Nt32\Dxe\PlatformBds\PlatformBds.inf"), Db, '', '')
-    for Inf in P.Sources:
-        print(Inf)
-    for Item in P.Macros:
-        print(Item, P.Macros[Item])
-
-    Db.Close()
