@@ -103,7 +103,7 @@ if __name__ == '__main__':
   if Process.returncode != 0:
     print('ERROR: Open SSL command not available.  Please verify PATH or set OPENSSL_PATH')
     sys.exit(Process.returncode)
-  print(Version[0])
+  print(Version[0].decode())
 
   #
   # Read input file into a buffer and save input filename
@@ -151,10 +151,10 @@ if __name__ == '__main__':
   # Extract public key from private key into STDOUT
   #
   Process = subprocess.Popen('%s rsa -in "%s" -modulus -noout' % (OpenSslCommand, args.PrivateKeyFileName), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-  PublicKeyHexString = Process.communicate()[0].split('=')[1].strip()
-  PublicKey = ''
+  PublicKeyHexString = Process.communicate()[0].split(b'=')[1].strip()
+  PublicKey = bytearray()
   while len(PublicKeyHexString) > 0:
-    PublicKey = PublicKey + chr(int(PublicKeyHexString[0:2], 16))
+    PublicKey = PublicKey + PublicKeyHexString[0:2]
     PublicKeyHexString=PublicKeyHexString[2:]
   if Process.returncode != 0:
     sys.exit(Process.returncode)
